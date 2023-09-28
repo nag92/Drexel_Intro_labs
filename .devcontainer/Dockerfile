@@ -13,32 +13,38 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
 RUN apt-get update 
 RUN apt-get install -y --no-install-recommends python3-rosdep
 
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+
+# Install turtlebot stuff
+RUN apt-get -y install ros-noetic-joy ros-noetic-teleop-twist-joy \
+  ros-noetic-teleop-twist-keyboard ros-noetic-laser-proc \
+  ros-noetic-rgbd-launch ros-noetic-rosserial-arduino \
+  ros-noetic-rosserial-python ros-noetic-rosserial-client \
+  ros-noetic-rosserial-msgs ros-noetic-amcl ros-noetic-map-server \
+  ros-noetic-move-base ros-noetic-urdf ros-noetic-xacro \
+  ros-noetic-compressed-image-transport ros-noetic-rqt* ros-noetic-rviz \
+  ros-noetic-gmapping ros-noetic-navigation ros-noetic-interactive-markers \
+  ros-noetic-turtlebot3*
+
+RUN echo "export TURTLEBOT3_MODEL=waffle_pi" >> ~/.bashrc
 
 
+# install git
+RUN apt-get update && apt-get install -y git
+
+
+# # Build the Catkin workspace and ensure it's sourced
+# RUN source /opt/ros/noetic/setup.bash \
+#  && cd turtlebot3_ws \
+#  && catkin_make
+# RUN echo "source /turtlebot3_ws/devel/setup.bash" >> ~/.bashrc
+
+
+# Set the working folder at startup
+
+WORKDIR /catkin_ws
 
 # Change the default shell to Bash
-SHELL [ "/bin/bash" , "-c" ]
- 
-# Install Git
-RUN apt-get update && apt-get install -y git
- 
-# Create a Catkin workspace and clone TurtleBot3 repos
-# RUN source /opt/ros/noetic/setup.bash \
-#  && mkdir -p /turtlebot3_ws/src \
-#  && cd /turtlebot3_ws/src \
-#  && catkin_init_workspace \
-#  && git clone -b noetic-devel https://github.com/ROBOTIS-GIT/turtlebot3.git \
-#  && git clone -b noetic-devel https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git \
-#  && git clone -b noetic-devel https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
-# RUN echo "export TURTLEBOT3_MODEL=waffle_pi" >> ~/.bashrc
- 
-# Build the Catkin workspace and ensure it's sourced
-RUN source /opt/ros/noetic/setup.bash \
- && cd turtlebot3_ws \
- && catkin_make
-RUN echo "source /turtlebot3_ws/devel/setup.bash" >> ~/.bashrc
- 
-# Set the working folder at startup
-WORKDIR /turtlebot3_ws
 
-RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+SHELL [ "/bin/bash" , "-c" ]
+
