@@ -1,5 +1,5 @@
- FROM osrf/ros:noetic-desktop-full
-
+#FROM osrf/ros:noetic-desktop-full
+FROM drexel_labs
  
 # # Minimal setup
 RUN apt-get update \
@@ -16,17 +16,7 @@ RUN apt-get install -y --no-install-recommends python3-rosdep
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 # Install turtlebot stuff
-RUN apt-get -y install ros-noetic-joy ros-noetic-teleop-twist-joy \
-  ros-noetic-teleop-twist-keyboard ros-noetic-laser-proc \
-  ros-noetic-rgbd-launch ros-noetic-rosserial-arduino \
-  ros-noetic-rosserial-python ros-noetic-rosserial-client \
-  ros-noetic-rosserial-msgs ros-noetic-amcl ros-noetic-map-server \
-  ros-noetic-move-base ros-noetic-urdf ros-noetic-xacro \
-  ros-noetic-compressed-image-transport ros-noetic-rqt* ros-noetic-rviz \
-  ros-noetic-gmapping ros-noetic-navigation ros-noetic-interactive-markers \
-  ros-noetic-turtlebot3*
 
-RUN echo "export TURTLEBOT3_MODEL=waffle_pi" >> ~/.bashrc
 
 
 # install git
@@ -34,15 +24,17 @@ RUN apt-get update && apt-get install -y git
 
 
 # # Build the Catkin workspace and ensure it's sourced
-# RUN source /opt/ros/noetic/setup.bash \
-#  && cd turtlebot3_ws \
-#  && catkin_make
-# RUN echo "source /turtlebot3_ws/devel/setup.bash" >> ~/.bashrc
+RUN source /opt/ros/noetic/setup.bash \
+ && cd /turtlebot3_ws \
+ && catkin_make \
+ && source /turtlebot3_ws/devel/setup.bash
+RUN echo "source /turtlebot3_ws/devel/setup.bash" >> ~/.bashrc
 
 
 # Set the working folder at startup
+# RUN echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/ros/.bashrc
 
-WORKDIR /catkin_ws
+WORKDIR catkin_ws
 
 # Change the default shell to Bash
 
