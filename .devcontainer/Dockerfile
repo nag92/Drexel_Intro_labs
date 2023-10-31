@@ -1,6 +1,6 @@
 #FROM osrf/ros:noetic-desktop-full
-FROM drexel_labs
- 
+FROM nag92/drexel_lab_core
+#FROM drexel_labs
 # # Minimal setup
 RUN apt-get update \
  && apt-get install -y locales lsb-release
@@ -16,8 +16,6 @@ RUN apt-get install -y --no-install-recommends python3-rosdep
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 # Install turtlebot stuff
-
-
 
 # install git
 RUN apt-get update && apt-get install -y git
