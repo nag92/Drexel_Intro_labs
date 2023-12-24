@@ -15,6 +15,16 @@
 		}
 	},
 
+    "runArgs": [
+        // "--net=host",
+        // "-e", "DISPLAY=${env:DISPLAY}",
+		// "-e", "QT_X11_NO_MITSHM=1",
+		"-e", "DISPLAY",
+		"-v", "/tmp/.X11-unix:/tmp/.X11-unix:rw",
+    ],
 	
-	
+	"containerEnv": {
+		// "DISPLAY": "${DISPLAY}", // Needed for GUI try ":0" for windows
+
+	},
 }
