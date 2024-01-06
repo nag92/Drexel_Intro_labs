@@ -29,7 +29,7 @@ Before you begin, ensure you have the following installed:
 
 1. **Clone the Repository**: Open your terminal and run the following command to clone this repository:
     ```
-    git clone https://github.com/your-username/ME571-Intro-to-Robotics.git
+    git clone https://github.com/<user_name>/Drexel_Intro_labs.git
     ```
 
 2. **Open Repository in VSCode using DevContainer**:
