@@ -34,6 +34,10 @@ RUN echo "source /turtlebot3_ws/devel/setup.bash" >> ~/.bashrc
 
 RUN echo "export ROS_HOSTNAME=10.0.0.184" >> ~/.bashrc
 RUN echo "export ROS_MASTER_URI=http://10.0.0.184:11311" >> ~/.bashrc
+
+RUN echo "export OPENCR_PORT=/dev/ttyACM0" >> ~/.bashrc
+RUN echo "export OPENCR_MODEL=om_with_tb3_noetic" >> ~/.bashrc
+RUN  echo "export LDS_MODEL=LDS-02" >> ~/.bashrc
 # Set the working folder at startup
 # RUN echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/ros/.bashrc
 
