@@ -18,7 +18,6 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends python3-rosdep gedit
 
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-
 # Install turtlebot stuff
 
 # install git
